@@ -8,9 +8,9 @@ module.exports = {
         try {
             const existingProductResponse = await findOne("Product", { name: req.body.data.name })
             if (existingProductResponse?.data) {
-                return res.status(400).json({ message: "Product already exists" })
+                return res.status(400).json({ message:"Product already exists" })
             }
-            const response = await create('Product', req.body.data)
+            const response = await create('Product', req.body.data,)
             res.status(201).json({ response })
         } catch (error) {
             console.error(error)
@@ -22,7 +22,7 @@ module.exports = {
     findProduct: async (req, res) => {
         try {
             const response = await findOne("Product", { name: req.body.data.name })
-            res.status(200).send(response.data)
+            res.status(200).send(response.data.availability)
 
         } catch (error) {
             console.error(error)
