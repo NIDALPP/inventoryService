@@ -3,7 +3,7 @@ const { findOne, create, find, updateOne } = require("../utils/connectors")
 module.exports = {
     createCat: async (req, res) => {
         try {
-            const { name, id, parentId } = req.body.data;
+            const { name, parentId } = req.body.data;
             if (!name) {
                 return res.status(400).json({ message: "Category name is required" });
             }
@@ -13,7 +13,7 @@ module.exports = {
                 return res.status(400).json({ message: "Category already exists" });
             }
 
-            const response = await create("Category", { id, name, parentId });
+            const response = await create("Category", { name, parentId });
             return res.status(201).json({ message: "Category created successfully", data: response });
         } catch (error) {
             console.error("Error creating category:", error);
@@ -36,15 +36,12 @@ module.exports = {
     findAll: async (req, res) => {
         try {
             const response = await find("Category")
-            if (!response ||!Array.isArray(response.data)){
-                console.error("invalid response from find ('category):",response,)
+            if (!response || !Array.isArray(response.data)) {
+                console.error("invalid response from find ('category):", response,)
                 return res.status(500).json({ message: "Error finding categories" });
             }
-            const subcategoriesResponse = await Promise.all(response.data.map(async(category)=>{
-                const subcategories = await find("Category", { category: category.parentId });
-            }))
-            // return{...category,subcategories}
-            res.status(200).send({ ...response.data, subcategories });
+
+            res.status(200).send(response);
         } catch (error) {
             console.error(error)
             res.status(500).json({ message: "Error finding categories" });

@@ -5,7 +5,7 @@ const catControllers=require('../controllers/categoryController')
 
 router.post('/createProduct', productController.addProduct)
 router.post('/findProduct',productController.findProduct)
-router.post('/findAll',productController.findAllProducts)
+router.get('/findAll',productController.findAllProducts)
 router.post('/deleteProduct',productController.deleteProduct)
 router.post('/updateProduct',productController.updateProduct)
 router.post('/createCat',catControllers.createCat)
