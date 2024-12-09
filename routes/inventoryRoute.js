@@ -4,7 +4,7 @@ const productController = require('../controllers/productController')
 const catControllers=require('../controllers/categoryController')
 
 router.post('/createProduct', productController.addProduct)
-router.post('/findProduct',productController.findProduct)
+router.get('/findProduct',productController.findProduct)
 router.get('/findAll',productController.findAllProducts)
 router.post('/deleteProduct',productController.deleteProduct)
 router.post('/updateProduct',productController.updateProduct)

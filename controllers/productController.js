@@ -24,7 +24,7 @@ module.exports = {
     },
     findProduct: async (req, res) => {
         try {
-            const response = await findOne("Product", { name: req.body.data.name })
+            const response = await findOne("Product", { name: req.body.name })
             res.status(200).send(response.data)
 
         } catch (error) {
